@@ -17,12 +17,23 @@ let world = {
 	projectiles:ps
 };
 
-function loadWorld(spawnx,spawny,filename) {
+function loadWorld() {
 	defaultWorld();
 }
 
 function defaultWorld() {
-
+	player = {
+		x:250,
+		y:250,
+		angle:Math.PI,
+		xvel:0,
+		yvel:0,
+		anglevel:0,
+		width:32,
+		height:64,
+		entitytype:"player"
+	}
+	world.entitylist.push(player);
 }
 
 function calculateDistance(playerX,playerY,entityX,entityY)
@@ -33,16 +44,10 @@ function calculateDistance(playerX,playerY,entityX,entityY)
 	var realDistance = Math.sqrt(Math.pow(horizontalDis, 2) + Math.pow(verticalDis,2));
 	return realDistance;
 }
-let bossshootability = 100;
 
 function worldUpdates() {
 	for(let m = 0; m<world.interacts.length;m++){
 		let interactable = world.interacts[m];
-		if(interactable.type == "key"){
-			interactable.sambob+=1;
-			interactable.sambob=interactable.sambob%100;
-			interactable.sprite.position.y=interactable.y+(Math.cos(interactable.sambob*Math.PI/50)*10);
-		}
 		if(rawCollide(player.x,player.y,player.width,player.height,interactable.x,interactable.y,interactable.width,interactable.height)){
 			if(interactable.type == "exit"){
 				//
@@ -51,25 +56,6 @@ function worldUpdates() {
 	}
 	
 	for(let m = 0; m<world.entitylist.length;m++){
-		let entity = world.entitylist[m];
-		entityBehavior(entity);
-		if (entity.entitytype == "enemy"){
-//			Use object atributes istead of variable names
-			var distanceFrom = calculateDistance(player.x, player.y, entity.x, entity.y);
-			// console.log("Distance from bug = " + distanceFrom);
-			if (distanceFrom < 150){
-				//console.log("Sound of bug plays!");
-			}
-			if(typeof entity.damagedeath !== 'undefined'){
-				entity.damagedeath-=1;
-				if(entity.damagedeath<=0){
-					world.entitylist.splice(world.entitylist.indexOf(entity),1);
-					m--;
-				}
-				entity.sprite.alpha = (entity.damagedeath%10)/10;
-			}
-		}
 		
 	}
-	world.noise = new Array();
 }

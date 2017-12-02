@@ -88,7 +88,7 @@ function physicsUpdate() {
 		//gravity
 		if (entity.yvel <= 10) {
 			//console.log("Applying gravity: "+entity.y);
-			entity.yvel += 0.98;
+			//entity.yvel += 0.98;
 		}
 		//friction
 		entity.xvel *= 0.5;
@@ -122,9 +122,12 @@ function physicsUpdate() {
 		if (entity.entitytype == "player") {
 			playersprite.position.x = entity.x;
 			playersprite.position.y = entity.y;
+			playersprite.anchor.set(0.5, 0.5);
+			playersprite.rotation = entity.angle;
 		}else{
 			entity.sprite.position.x = entity.x;
 			entity.sprite.position.y = entity.y;
+			entity.sprite.rotation = entity.angle;
 		}
 
 	}
