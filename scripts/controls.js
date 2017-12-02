@@ -31,7 +31,7 @@
 		
 	}
 	function shoot(){
-		if(weapon==2){  
+		if(weapon==1){  
 		let diffx =  (mousex-player.x);
 		let diffy =  (mousey-player.y);
 		let ratio = diffy/diffx;
@@ -46,24 +46,7 @@
 		    stage.addChild(bulletsprite);
 			let bullet = {x:player.x+player.width/2, y:player.y+player.height/2,xvel:mousxvel,yvel:mousyvel,type:"bullet",
 			width:1,height:1,sprite:bulletsprite};
-			world.projectiles.push(bullet);
-		}
-		if(weapon==3){  
-		let diffx =  (mousex-player.x);
-		let diffy =  (mousey-player.y);
-		let ratio = diffy/diffx;
-		let speed = 500;
-		let k = Math.sqrt(speed/(Math.pow((diffx),2)+Math.pow(diffy,2)));
-		var mousxvel = k*diffx;
-		 var mousyvel = k*diffy;
-		 let bullettexture = PIXI.Texture.fromImage("assets/images/Shittybullet.png");
-		    bulletsprite = new PIXI.Sprite(bullettexture);
-		   bulletsprite.position.x = 0;
-		    bulletsprite.position.y = 0;
-		    stage.addChild(bulletsprite);
-			let bullet = {x:player.x+player.width/2, y:player.y+player.height/2,xvel:mousxvel,yvel:mousyvel,type:"noisemaker",
-			width:1,height:1,sprite:bulletsprite};
-			world.projectiles.push(bullet);
+			//world.projectiles.push(bullet);
 		}
 	}
 	function clickm(evt){

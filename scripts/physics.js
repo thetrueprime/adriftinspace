@@ -56,58 +56,14 @@ function checkCollision(xloc, yloc, ewidth, eheight, currentfloorlist) {
 function physicsUpdate() {
 	for(let p = 0; p<world.projectiles.length;p++){
 
-		let currentprojectile = world.projectiles[p];
-		if(currentprojectile.type != "bullet" && currentprojectile.type != "monster"){	
-			if (currentprojectile.yvel <= 10) {		
-				currentprojectile.yvel+=0.98;
-			}
-			currentprojectile.xvel *= 0.9;
-		}
-		if(currentprojectile.type == "monster"){
-			if(currentprojectile.time>0){currentprojectile.time-=1}else{
-				currentprojectile.sprite.destroy();
+		let currentprojectile = world.projectiles[p];	
+			/*	currentprojectile.sprite.destroy();
 				currentprojectile.removed = true;
 				world.projectiles.splice(world.projectiles.indexOf(currentprojectile),1);
 				p--;
-			}
-		}
-		if(checkEntityCollisions(currentprojectile.x + currentprojectile.xvel, currentprojectile.y + currentprojectile.yvel, currentprojectile.width, currentprojectile.height, world.entitylist)[0]){
-			var centity = checkEntityCollisions(currentprojectile.x + currentprojectile.xvel, currentprojectile.y + currentprojectile.yvel, currentprojectile.width, currentprojectile.height, world.entitylist)[1];
-			if(centity.entitytype == "player"){
-				if(currentprojectile.type == "monster"){
-					if(justdamaged==0){
-						health -= 20;
-						justdamaged = 40;
-					}
-				}
-			}else{
-				//console.log("removing due to entity collision"+checkEntityCollisions(currentprojectile.x + currentprojectile.xvel, currentprojectile.y + currentprojectile.yvel, currentprojectile.width, currentprojectile.height, world.entitylist)[1].type);
-				if(!(currentprojectile.type == "monster")){
-				console.log("hit entity as projectile: "+currentprojectile.type);
-				if(currentprojectile.type == "fallingblock"){
-					console.log("hit entity as falling block");
-					centity.health -= 10;
-					if(centity.health<=0){
-						centity.damagedeath = 40;
-					}
-				}
-			
-				currentprojectile.sprite.destroy();
-				currentprojectile.removed = true;
-				world.projectiles.splice(world.projectiles.indexOf(currentprojectile),1);
-				p--;
-				}
-			}
-			//remove
-		}
-			if(checkCollision(currentprojectile.x + currentprojectile.xvel, currentprojectile.y + currentprojectile.yvel, currentprojectile.width, currentprojectile.height, world.floorlist)){
-				if(!(currentprojectile.type == "monster")){
-				currentprojectile.sprite.destroy();
-				currentprojectile.removed = true;
-				world.projectiles.splice(world.projectiles.indexOf(currentprojectile),1);
-				p--;
-				//remove
-				}
+			//remove*/
+			if(checkEntityCollisions(currentprojectile.x + currentprojectile.xvel, currentprojectile.y + currentprojectile.yvel, currentprojectile.width, currentprojectile.height, world.entitylist)){
+
 			}else{
 				currentprojectile.x += currentprojectile.xvel;
 				currentprojectile.y += currentprojectile.yvel;
@@ -120,20 +76,7 @@ function physicsUpdate() {
 		for(let m = 0; m<world.interacts.length;m++){
 
 				let interactable = world.interacts[m];
-				if(rawCollide(currentprojectile.x,currentprojectile.y,currentprojectile.width,currentprojectile.height,
-					interactable.x,interactable.y,interactable.width,interactable.height)){
-					if(interactable.type == "chain"){
-						if(currentprojectile.type == "bullet"){
-							let floortodrop = whatCollided(interactable.x+32,interactable.y+96,interactable.width,interactable.height,world.floorlist);
-							if(typeof floortodrop !== 'undefined'){
-							let fallingblock = {x:floortodrop.x,y:floortodrop.y,width:floortodrop.width,height:floortodrop.height,xvel:0,yvel:0.5,type:"fallingblock",sprite:floortodrop.sprite};
-							
-							world.floorlist.splice(world.floorlist.indexOf(floortodrop) ,1);							
-world.projectiles.push(fallingblock);	
-}
-						}
-					}
-				}
+				
 
 
 			}
@@ -151,6 +94,7 @@ world.projectiles.push(fallingblock);
 		entity.xvel *= 0.5;
 
 		//collision
+		/*
 		let floorlist = world.floorlist;
 		if (checkCollision(entity.x + entity.xvel, entity.y + entity.yvel, entity.width, entity.height, floorlist)) {
 
@@ -172,7 +116,7 @@ world.projectiles.push(fallingblock);
 			entity.y += entity.yvel;
 
 		}
-
+		*/
 		//
 
 		if (entity.entitytype == "player") {

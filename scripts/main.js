@@ -7,7 +7,6 @@
 		let heartsprites = {};
 
 		function continueLoad() {
-			let floortextures = {};
 					
 
 
@@ -16,17 +15,9 @@
 		    playersprite = new PIXI.Sprite(playertexture);
 		    playersprite.position.x = 0;
 		    playersprite.position.y = 0;  
-			playersprite.width = 48;
-		    playersprite.height = 96;
+			playersprite.width = 32;
+		    playersprite.height = 64;
 		    stage.addChild(playersprite); 
-			
-			 let bosstexture = PIXI.Texture.fromImage("assets/images/enemies/boss.png");
-		 bosssprite = new PIXI.Sprite(bosstexture);
-		    bosssprite.position.x = 0;
-		    bosssprite.position.y = 0;  
-			bosssprite.width = 128;
-		    bosssprite.height = 128;
-		    //stage.addChild(bosssprite); 
 			
 			 let te = PIXI.Texture.fromImage("assets/images/environment/shittybox.png");
 		    test = new PIXI.Sprite(te);
@@ -35,30 +26,6 @@
 		    stage.addChild(test);
 		//HUD
 			HUDcontainer = new PIXI.Container();
-			
-			 let blackfront = PIXI.Texture.fromImage("assets/images/hud/blackbox.png");
-			    blackdrop = new PIXI.Sprite(blackfront);
-			    blackdrop.position.x = 0;
-			    blackdrop.position.y = 0;
-			    blackdrop.width = 1024;
-			    blackdrop.height = 512;
-		            blackdrop.alpha = 0.6;
-			    HUDcontainer.addChild(blackdrop);
-
-			thing = new PIXI.Graphics();
-			thing2 = new PIXI.Graphics();
-			//bottom
-			thing.beginFill();
-			thing.moveTo(0,512);	
-			thing.lineTo(1024,512);
-			thing.closePath();
-			thing.endFill();
-			//thing.drawCircle(0,0,300);
-			//
-
-			stage.addChild(thing);
-			
-			blackdrop.mask = thing;	
 
 			for(let h = 0; h<5; h++){
 			    let background = PIXI.Texture.fromImage("assets/images/hud/battery-empty.png");
@@ -97,29 +64,6 @@
 				}
 			);
 			
-			
-				
-			
-			
-			/*
-			let bigstart = PIXI.Texture.fromImage("assets/images/environment/star-3.png");
-			bigstar = new PIXI.Sprite(bigstart);
-			bigstar.position.x = 512;
-			bigstar.position.y = 512;	
-			let bigstart2 = PIXI.Texture.fromImage("assets/images/environment/star-3.png");
-			bigstar2 = new PIXI.Sprite(bigstart);
-			bigstar2.position.x = 512;
-			bigstar2.position.y = 512;
-			var blurf = new PIXI.filters.BlurFilter();
-			blurf.blur =200;
-			bigstar.filters = [blurf];
-			var blurf2 = new PIXI.filters.BlurFilter();
-			blurf2.blur = 100;
-			bigstar2.filters = [blurf];
-			stage.addChild(bigstar);
-			stage.addChild(bigstar2);
-			
-			*/
 			menucontainer = new PIXI.Container();
 			let menubackground = PIXI.Texture.fromImage("assets/images/hud/blackbox.png");
 			menu = new PIXI.Sprite(menubackground);
