@@ -11,6 +11,34 @@
 		
 	}
 	
+	function rotateShip(){
+		let diffx = mousex-player.x;
+		let diffy = mousey-player.y;
+		if(diffx == 0){diffx=0.01};
+		let angle = Math.atan(diffy/diffx);
+		angle+=(Math.PI/2);
+		if(diffx<0){
+			angle+=Math.PI;
+		}
+
+	
+		//slide to angle
+		player.angle = player.angle % (Math.PI*2);
+		angle = angle % (Math.PI*2);
+		if(player.angle<0){
+			player.angle = Math.PI*2+player.angle 
+		}
+		if(player.angle<angle){
+			player.anglevel = Math.PI/60;
+		}
+		if(player.angle>angle){
+			player.anglevel = -Math.PI/60;
+		}	
+		if(player.angle-angle>Math.PI ||player.angle-angle<-Math.PI){
+			player.anglevel = -player.anglevel;
+		}
+		player.angle += player.anglevel;
+	}
 	function recalculateMouse(){
 		
 		var offsetx = player.x+player.width/2-512;

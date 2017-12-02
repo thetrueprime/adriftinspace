@@ -6,7 +6,7 @@
 		let health = 100;
 		let heartsprites = {};
 
-		function continueLoad() {
+		function loadTextures() {
 					
 
 
@@ -51,7 +51,7 @@
 
 			stage.addChild(HUDcontainer);
 
-		    update();//requestAnimationFrame(update);
+		    //requestAnimationFrame(update);
 		}
 		let gamestate = "menu";
 		//initalisation
@@ -83,7 +83,9 @@
 			startGame();
 		}
 		function startGame(){
-			continueLoad();
+			loadTextures();
+			loadWorld();
+			update();
 		}
 		let mousex = 0;
 		let mousey = 0;
@@ -95,11 +97,16 @@
 			screenpx = 512;
 			screenpy = 400;
 		}
+
+
 		function update() {
 		    //input
 		    keycheck();
 		    recalculateMouse();
 			playeractual();
+			rotateShip();
+
+
 			test.position.x = mousex-5;
 			test.position.y = mousey-5;
 			test.width = 10;
@@ -134,6 +141,10 @@
 					stage.removeChild(menucontainer);
 				}
 			}
+			var offsetx = player.x+player.width/2-512;
+			var offsety = player.y+player.height/2-400;
+			stage.pivot.x = offsetx;
+			stage.pivot.y = offsety;
 			renderer.render(stage);
 			requestAnimationFrame(update);
 		}
