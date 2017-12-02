@@ -22,7 +22,7 @@ function loadWorld() {
 }
 
 function defaultWorld() {
-	player = {
+	ship = {
 		x:250,
 		y:250,
 		angle:Math.PI,
@@ -31,9 +31,9 @@ function defaultWorld() {
 		anglevel:0,
 		width:32,
 		height:64,
-		entitytype:"player"
+		entitytype:"ship"
 	}
-	world.entitylist.push(player);
+	world.entitylist.push(ship);
 }
 
 function calculateDistance(playerX,playerY,entityX,entityY)
