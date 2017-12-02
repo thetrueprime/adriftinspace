@@ -98,18 +98,6 @@
 			screenpy = 400;
 		}
 
-		function rotateShip(){
-			let diffx = mousex-player.x;
-			let diffy = mousey-player.y;
-			if(diffx == 0){diffx=0.01};
-			let angle = Math.atan(diffy/diffx);
-			angle+=(Math.PI/2);
-			if(diffx<0){
-				angle+=Math.PI;
-			}
-			console.log(angle);
-			player.angle = angle;
-		}
 
 		function update() {
 		    //input
