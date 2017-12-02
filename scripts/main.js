@@ -1,6 +1,7 @@
 		//initialisation
 		
 		let ship = {};
+		let player = {};
 		let drawnstars = new Array(100);
 		//event listener
 		let health = 100;
@@ -13,18 +14,28 @@
 
 
 			
-		    let shiptexture = PIXI.Texture.fromImage("assets/images/player/player.png");
+		    let shiptexture = PIXI.Texture.fromImage("assets/images/player/ship.png");
 		    shipsprite = new PIXI.Sprite(shiptexture);
 		    shipsprite.position.x = 0;
 		    shipsprite.position.y = 0;  
 			shipsprite.width = 32;
 		    shipsprite.height = 64;
-			stage.addChild(shipsprite);   
+			stage.addChild(shipsprite);    
+			
+			let playertexture = PIXI.Texture.fromImage("assets/images/player/player.png");
+		    playersprite = new PIXI.Sprite(playertexture);
+		    playersprite.position.x = 0;
+		    playersprite.position.y = 0;  
+			playersprite.width = 32;
+			playersprite.height = 32;
+			playersprite.visible = false;
+			stage.addChild(playersprite);   
 			
 			let interiortexture = PIXI.Texture.fromImage("assets/images/interior.png");
 		    interiorsprite = new PIXI.Sprite(interiortexture);
 		    interiorsprite.position.x = 0;
-		    interiorsprite.position.y = 0;  
+			interiorsprite.position.y = 0;  
+			interiorsprite.visible = false;
 			//interiorsprite.width = 32;
 		    //interiorsprite.height = 64;
 		    stage.addChild(interiorsprite); 
@@ -153,16 +164,33 @@
 					stage.removeChild(menucontainer);
 				}
 
+				render();
+			}
+			renderer.render(stage);
+			requestAnimationFrame(update);
+		}
+
+		function render(){
+			if(job == ""){
+				interiorsprite.visible = true;
+				playersprite.visible = true;
+				stage.removeChild(interiorsprite);
+				stage.addChild(interiorsprite);
+				stage.removeChild(playersprite);
+				stage.addChild(playersprite);
+				shipsprite.visible = false;
+				var offsetx = player.x+ player.width/2-WIDTH/2;
+				var offsety = player.y+ player.height/2-HEIGHT/2;
+				stage.pivot.x = offsetx;
+				stage.pivot.y = offsety;
+			}else{
+				interiorsprite.visible = false;
+				playersprite.visible = false;
+				shipsprite.visible = true;
 				var offsetx = ship.x+ship.width/2-WIDTH/2;
 				var offsety = ship.y+ship.height/2-HEIGHT/2;
 				stage.pivot.x = offsetx;
 				stage.pivot.y = offsety;
-				//stage.anchor.set(0.5, 0.5);
-				//console.log(player.angle);
-				//stage.pivot.x = WIDTH/2;
-				//stage.pivot.y = HEIGHT/2;
-				//stage.rotation = player.angle;
 			}
-			renderer.render(stage);
-			requestAnimationFrame(update);
+
 		}
