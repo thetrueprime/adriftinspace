@@ -1,0 +1,11 @@
+function entityBehavior(entity){
+//what enemies do
+	var distanceFrom = calculateDistance(
+
+	playerCollide());
+	//console.log("actuaL Distance from enemy = " + distanceFrom);
+	if(distanceFrom<=20){
+		//console.log("within damage range");
+	}
+	
+}
