@@ -21,23 +21,29 @@
 			angle+=Math.PI;
 		}
 
-	
+		
 		//slide to angle
+		var speedofslide = 30;
 		player.angle = player.angle % (Math.PI*2);
 		angle = angle % (Math.PI*2);
 		if(player.angle<0){
 			player.angle = Math.PI*2+player.angle 
 		}
 		if(player.angle<angle){
-			player.anglevel = Math.PI/60;
+			player.anglevel = Math.PI/speedofslide;
 		}
 		if(player.angle>angle){
-			player.anglevel = -Math.PI/60;
+			player.anglevel = -Math.PI/speedofslide;
 		}	
 		if(player.angle-angle>Math.PI ||player.angle-angle<-Math.PI){
 			player.anglevel = -player.anglevel;
 		}
-		player.angle += player.anglevel;
+		if((Math.abs(player.angle-angle))>(Math.PI/speedofslide)){
+			player.angle += player.anglevel;
+		}else{
+			player.angle = angle;
+		}
+
 	}
 	function recalculateMouse(){
 		
@@ -95,35 +101,27 @@
 	weapon = wnumber;
 	}
 	
+	function thrust(){
+		let accel = 0.1;
+		player.xvel += Math.cos(player.angle-Math.PI/2)*accel;
+		player.yvel += Math.sin(player.angle-Math.PI/2)*accel;
+		console.log("thrusting: "+player.xvel+","+player.yvel);
+	}
+	function reverseThrust(){
+		player.xvel*=0.9;
+		player.yvel*=0.9;
+		console.log("reverse thrusting: "+player.xvel+","+player.yvel);
+	}
+
 	function use(){}
 	
 	function keycheck(){
-		if(keylist.includes(65)){
-			//console.log("left");
-			move(-1);
-		}
-		if(keylist.includes(68)){
-			//console.log("right");
-			move(1);
-		}
-		if(keylist.includes(49)){//1
-			switchWeapon(1);
-			keylist.splice(keylist.indexOf(49),1);
-		}		
-		if(keylist.includes(50)){//2
-			switchWeapon(2);
-			keylist.splice(keylist.indexOf(50),1);
-		}	
-		if(keylist.includes(51)){//3
-			switchWeapon(3);
-			keylist.splice(keylist.indexOf(51),1);
-		}	
-		if(keylist.includes(52)){//4
-			switchWeapon(2);
-			keylist.splice(keylist.indexOf(52),1);
-		}	
+		
 		if(keylist.includes(87)){//W
-			use();
+			thrust();
+		}
+		if(keylist.includes(83)){//S
+			reverseThrust();
 		}
 	}	
 
