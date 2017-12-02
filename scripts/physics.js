@@ -90,8 +90,8 @@ function physicsUpdate() {
 			//console.log("Applying gravity: "+entity.y);
 			//entity.yvel += 0.98;
 		}
-		//friction
-		entity.xvel *= 0.5;
+		//friction NONE IN SPACE SILLY
+		//entity.xvel *= 0.5;
 
 		//collision
 		/*
@@ -119,6 +119,8 @@ function physicsUpdate() {
 		*/
 		//
 
+		entity.x += entity.xvel;
+		entity.y += entity.yvel;
 		if (entity.entitytype == "player") {
 			playersprite.position.x = entity.x;
 			playersprite.position.y = entity.y;
