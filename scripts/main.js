@@ -1,23 +1,33 @@
 		//initialisation
 		
-		let player = {};
+		let ship = {};
 		let drawnstars = new Array(100);
 		//event listener
 		let health = 100;
 		let heartsprites = {};
-
+		let view = "exterior";
+		let WIDTH = 1600;
+		let HEIGHT = 800;
 		function loadTextures() {
 					
 
 
 			
-		    let playertexture = PIXI.Texture.fromImage("assets/images/player/player.png");
-		    playersprite = new PIXI.Sprite(playertexture);
-		    playersprite.position.x = 0;
-		    playersprite.position.y = 0;  
-			playersprite.width = 32;
-		    playersprite.height = 64;
-		    stage.addChild(playersprite); 
+		    let shiptexture = PIXI.Texture.fromImage("assets/images/player/player.png");
+		    shipsprite = new PIXI.Sprite(shiptexture);
+		    shipsprite.position.x = 0;
+		    shipsprite.position.y = 0;  
+			shipsprite.width = 32;
+		    shipsprite.height = 64;
+			stage.addChild(shipsprite);   
+			
+			let interiortexture = PIXI.Texture.fromImage("assets/images/interior.png");
+		    interiorsprite = new PIXI.Sprite(interiortexture);
+		    interiorsprite.position.x = 0;
+		    interiorsprite.position.y = 0;  
+			//interiorsprite.width = 32;
+		    //interiorsprite.height = 64;
+		    stage.addChild(interiorsprite); 
 			
 			 let te = PIXI.Texture.fromImage("assets/images/environment/shittybox.png");
 		    test = new PIXI.Sprite(te);
@@ -44,8 +54,8 @@
 			loadspri = new PIXI.Sprite(loadingte);
 			loadspri.position.x = 0;
 			loadspri.position.y = 0;
-			loadspri.width = 1024;
-			loadspri.height = 512;
+			loadspri.width = WIDTH;
+			loadspri.height = HEIGHT;
 			loadspri.alpha = 0;
 			HUDcontainer.addChild(loadspri);
 
@@ -58,8 +68,8 @@
 		function init() {
 			stage = new PIXI.Container();
 			renderer = PIXI.autoDetectRenderer(
-				1024,
-				512, {
+				WIDTH,
+				HEIGHT, {
 					view: document.getElementById("game-canvas")
 				}
 			);
@@ -71,12 +81,12 @@
 			menufore = new PIXI.Sprite(menuforeground);
 			menufore.x = 0;
 			menufore.y = 0;
-			menufore.width = 1024;
-			menufore.height = 512;
+			menufore.width = WIDTH;
+			menufore.height = HEIGHT;
 			menu.x = 0;
 			menu.y = 0;
-			menu.width = 1024;
-			menu.height = 512;
+			menu.width = WIDTH;
+			menu.height = HEIGHT;
 			menucontainer.addChild(menu);
 			menucontainer.addChild(menufore);
 				
@@ -93,9 +103,10 @@
 		let screenmy = 0;
 		let screenpx = 0;
 		let screenpy = 0;
+
 		function playeractual(){
-			screenpx = 512;
-			screenpy = 400;
+			screenpx = WIDTH/2;
+			screenpy = HEIGHT/2;
 		}
 
 
@@ -104,7 +115,9 @@
 		    keycheck();
 		    recalculateMouse();
 			playeractual();
-			rotateShip();
+			//
+			
+		
 
 
 			test.position.x = mousex-5;
@@ -114,21 +127,20 @@
 				
 			if(gamestate=="running"){
 
-
-				stage.removeChild(playersprite);
-				stage.addChild(playersprite);
-				stage.removeChild(HUDcontainer);
-				stage.addChild(HUDcontainer);
-
+				if(job == "pilot"){
+					rotateShip();
+				}
 				//world update
 				worldUpdates();
-
-
 				//physics
 				physicsUpdate();
 				//RENDER
 				//console.log("rendering");
 				
+				stage.removeChild(shipsprite);
+				stage.addChild(shipsprite);
+				stage.removeChild(HUDcontainer);
+				stage.addChild(HUDcontainer);
 				
 			}
 
@@ -140,11 +152,17 @@
 				if(typeof menucontainer !== 'undefined'){
 					stage.removeChild(menucontainer);
 				}
+
+				var offsetx = ship.x+ship.width/2-WIDTH/2;
+				var offsety = ship.y+ship.height/2-HEIGHT/2;
+				stage.pivot.x = offsetx;
+				stage.pivot.y = offsety;
+				//stage.anchor.set(0.5, 0.5);
+				//console.log(player.angle);
+				//stage.pivot.x = WIDTH/2;
+				//stage.pivot.y = HEIGHT/2;
+				//stage.rotation = player.angle;
 			}
-			var offsetx = player.x+player.width/2-512;
-			var offsety = player.y+player.height/2-400;
-			stage.pivot.x = offsetx;
-			stage.pivot.y = offsety;
 			renderer.render(stage);
 			requestAnimationFrame(update);
 		}

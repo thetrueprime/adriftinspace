@@ -121,11 +121,11 @@ function physicsUpdate() {
 
 		entity.x += entity.xvel;
 		entity.y += entity.yvel;
-		if (entity.entitytype == "player") {
-			playersprite.position.x = entity.x;
-			playersprite.position.y = entity.y;
-			playersprite.anchor.set(0.5, 0.5);
-			playersprite.rotation = entity.angle;
+		if (entity.entitytype == "ship") {
+			shipsprite.position.x = entity.x;
+			shipsprite.position.y = entity.y;
+			shipsprite.anchor.set(0.5, 0.5);
+			shipsprite.rotation = entity.angle;
 		}else{
 			entity.sprite.position.x = entity.x;
 			entity.sprite.position.y = entity.y;

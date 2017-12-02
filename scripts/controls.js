@@ -11,8 +11,8 @@
 	}
 	
 	function rotateShip(){
-		let diffx = mousex-player.x;
-		let diffy = mousey-player.y;
+		let diffx = mousex-ship.x;
+		let diffy = mousey-ship.y;
 		if(diffx == 0){diffx=0.01};
 		let angle = Math.atan(diffy/diffx);
 		angle+=(Math.PI/2);
@@ -23,31 +23,31 @@
 		
 		//slide to angle
 		var speedofslide = 30;
-		player.angle = player.angle % (Math.PI*2);
+		ship.angle = ship.angle % (Math.PI*2);
 		angle = angle % (Math.PI*2);
-		if(player.angle<0){
-			player.angle = Math.PI*2+player.angle 
+		if(ship.angle<0){
+			ship.angle = Math.PI*2+ship.angle 
 		}
-		if(player.angle<angle){
-			player.anglevel = Math.PI/speedofslide;
+		if(ship.angle<angle){
+			ship.anglevel = Math.PI/speedofslide;
 		}
-		if(player.angle>angle){
-			player.anglevel = -Math.PI/speedofslide;
+		if(ship.angle>angle){
+			ship.anglevel = -Math.PI/speedofslide;
 		}	
-		if(player.angle-angle>Math.PI ||player.angle-angle<-Math.PI){
-			player.anglevel = -player.anglevel;
+		if(ship.angle-angle>Math.PI ||ship.angle-angle<-Math.PI){
+			ship.anglevel = -ship.anglevel;
 		}
-		if((Math.abs(player.angle-angle))>(Math.PI/speedofslide)){
-			player.angle += player.anglevel;
+		if((Math.abs(ship.angle-angle))>(Math.PI/speedofslide)){
+			ship.angle += ship.anglevel;
 		}else{
-			player.angle = angle;
+			ship.angle = angle;
 		}
 
 	}
 	function recalculateMouse(){
 		
-		var offsetx = player.x+player.width/2-512;
-		var offsety = player.y+player.height/2-400;
+		var offsetx = ship.x+ship.width/2-WIDTH/2;
+		var offsety = ship.y+ship.height/2-HEIGHT/2;
 		mousex = screenmx+offsetx;
 		mousey = screenmy+offsety;
 	}
@@ -64,8 +64,8 @@
 		
 	}
 	function shoot(){
-		let diffx =  (mousex-player.x);
-		let diffy =  (mousey-player.y);
+		let diffx =  (mousex-ship.x);
+		let diffy =  (mousey-ship.y);
 		let ratio = diffy/diffx;
 		let speed = 100;
 		let k = Math.sqrt(speed/(Math.pow((diffx),2)+Math.pow(diffy,2)));
@@ -88,21 +88,35 @@
 	
 	function thrust(){
 		let accel = 0.1;
-		player.xvel += Math.cos(player.angle-Math.PI/2)*accel;
-		player.yvel += Math.sin(player.angle-Math.PI/2)*accel;
+		ship.xvel += Math.cos(ship.angle-Math.PI/2)*accel;
+		ship.yvel += Math.sin(ship.angle-Math.PI/2)*accel;
 	}
 	function reverseThrust(){
-		player.xvel*=0.9;
-		player.yvel*=0.9;
+		ship.xvel*=0.9;
+		ship.yvel*=0.9;
 	}
-	
+	function use(){
+		if(view == "exterior"){
+			view = "interior";
+			job = "";
+		}else{
+
+		}
+	}
 	function keycheck(){
-		
+
+		if(keylist.includes(69)){//E
+			use();
+		}
 		if(keylist.includes(87)){//W
-			thrust();
+			if(job == "pilot"){
+				thrust();
+			}
 		}
 		if(keylist.includes(83)){//S
-			reverseThrust();
+			if(job == "pilot"){
+				reverseThrust();
+			}
 		}
 	}	
 
