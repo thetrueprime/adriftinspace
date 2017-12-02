@@ -9,8 +9,7 @@
 		var keyCode = evt.which;
 		keylist.push(keyCode);
 	}
-	
-	function rotateShip(){
+	function getMousePlayerAngle(){
 		let diffx = mousex-ship.x;
 		let diffy = mousey-ship.y;
 		if(diffx == 0){diffx=0.01};
@@ -19,10 +18,12 @@
 		if(diffx<0){
 			angle+=Math.PI;
 		}
-
-		
+		return angle;
+	}
+	function rotateShip(){
+		var angle = getMousePlayerAngle();
 		//slide to angle
-		var speedofslide = 30;
+		var speedofslide = 15;
 		ship.angle = ship.angle % (Math.PI*2);
 		angle = angle % (Math.PI*2);
 		if(ship.angle<0){
@@ -103,6 +104,12 @@
 
 		}
 	}
+	function move(xv,yv){
+		if(Math.abs(xv)>0)
+		player.xvel = xv*20;
+		if(Math.abs(yv)>0)
+		player.yvel = yv*20;
+	}
 	function keycheck(){
 
 		if(keylist.includes(69)){//E
@@ -111,11 +118,27 @@
 		if(keylist.includes(87)){//W
 			if(job == "pilot"){
 				thrust();
+			}else if(job == "shield"){
+
+			}else{
+				move(0,-1);
+			}
+		}
+		if(keylist.includes(65)){//A
+			if(job == ""){
+				move(-1,0);
+			}
+		}
+		if(keylist.includes(68)){//D
+			if(job == ""){
+				move(1,0);
 			}
 		}
 		if(keylist.includes(83)){//S
 			if(job == "pilot"){
 				reverseThrust();
+			}else{
+				move(0,1);
 			}
 		}
 	}	

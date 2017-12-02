@@ -82,20 +82,11 @@ function physicsUpdate() {
 			}
 		
 	}
-	for (let e = 0; e < world.entitylist.length; e++) {
-		entity = world.entitylist[e];
-		//physics
-		//gravity
-		if (entity.yvel <= 10) {
-			//console.log("Applying gravity: "+entity.y);
-			//entity.yvel += 0.98;
-		}
-		//friction NONE IN SPACE SILLY
-		//entity.xvel *= 0.5;
-
-		//collision
-		/*
-		let floorlist = world.floorlist;
+	for (let p = 0; p < ship.crew.length; p++) {
+		entity = ship.crew[p];
+		entity.xvel *= 0.5;
+		entity.yvel *= 0.5;
+		let floorlist = ship.floorlist;
 		if (checkCollision(entity.x + entity.xvel, entity.y + entity.yvel, entity.width, entity.height, floorlist)) {
 
 			if (checkCollision(entity.x + entity.xvel, entity.y, entity.width, entity.height, floorlist)) {
@@ -116,8 +107,14 @@ function physicsUpdate() {
 			entity.y += entity.yvel;
 
 		}
-		*/
-		//
+	//	console.log(entity.xvel+","+entity.yvel);
+		//console.log(entity.x+","+entity.y);
+		entity.sprite.position.x = entity.x;
+		entity.sprite.position.y = entity.y;
+	}
+	for (let e = 0; e < world.entitylist.length; e++) {
+		entity = world.entitylist[e];
+		//physics
 
 		entity.x += entity.xvel;
 		entity.y += entity.yvel;

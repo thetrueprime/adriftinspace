@@ -31,8 +31,22 @@ function defaultWorld() {
 		anglevel:0,
 		width:32,
 		height:64,
-		entitytype:"ship"
+		entitytype:"ship",
+		crew:[],
+		floorlist:[]
 	}
+	player = {
+		x:0,
+		y:0,
+		xvel:0,
+		yvel:0,
+		width:16,
+		height:16,
+		entitytype:"player",
+		username:"prime",
+		sprite:playersprite
+	}
+	ship.crew.push(player);
 	world.entitylist.push(ship);
 }
 
