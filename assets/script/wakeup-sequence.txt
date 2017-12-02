@@ -1,0 +1,18 @@
+Ship computer initializing... Done
+Reboot completed at:  {Current date/time}
+WARNING: Power levels below threshhold value: 750 MJ
+Updating power priority stack... Done
+Re-establishing safeguard protocols... Done
+Protocol 0x1C3 triggered: Conserve power levels
+Preparing to shut down subsystem: ID = "CRYOSLEEP"... Failed
+WARNING: Conflict detected
+Protocol 0x002 triggered: Preserve life of crew
+Processing... Done
+Acceptable compromise reached
+Rerouting power grid... Done
+Cooling down cryropods... Done
+Preparing to eject lifeforms... Done
+Preparing comforting music... Done
+Beginning sequence... Done
+Next reboot scheduled: {Current date/time + 5 years}
+Shutting down
