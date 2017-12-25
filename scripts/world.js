@@ -33,11 +33,27 @@ function defaultWorld() {
 		height:64,
 		entitytype:"ship",
 		crew:[],
-		floorlist:[]
+		floorlist:[
+			///*
+			{x:200,y:0,width:400,height:50},
+			{x:200,y:0,width:100,height:300},
+			{x:0,y:250,width:300,height:50},
+			{x:0,y:250,width:50,height:200},
+			{x:0,y:450,width:500,height:50},
+			{x:450,y:0,width:50,height:500}
+			
+			//terminal test*/
+
+
+		],
+		terminals:[
+			{name:"pilot",x:300,y:50,width:150,height:50},
+			{name:"shields", x:50,y:300,width:50,height:150}
+		]
 	}
 	player = {
-		x:0,
-		y:0,
+		x:350,
+		y:100,
 		xvel:0,
 		yvel:0,
 		width:16,

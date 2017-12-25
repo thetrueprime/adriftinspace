@@ -23,7 +23,7 @@
 	function rotateShip(){
 		var angle = getMousePlayerAngle();
 		//slide to angle
-		var speedofslide = 15;
+		var speedofslide = 10;
 		ship.angle = ship.angle % (Math.PI*2);
 		angle = angle % (Math.PI*2);
 		if(ship.angle<0){
@@ -62,7 +62,7 @@
 		while(keylist.indexOf(keyCode) > -1){
 			keylist.splice(keylist.indexOf(keyCode),1);
 		}
-		
+		releaseKey(keyCode);
 	}
 	function shoot(){
 		let diffx =  (mousex-ship.x);
@@ -79,9 +79,9 @@
 			let buttony = 300;
 			let width = 200;
 			let height = 200;
-			if(evt.offsetX>buttonx && evt.offsetX<buttonx+width && evt.offsetY>buttony && evt.offsetY<buttony+height){
+			//if(evt.offsetX>buttonx && evt.offsetX<buttonx+width && evt.offsetY>buttony && evt.offsetY<buttony+height){
 				gamestate = "running";	
-			}
+			//}
 		}else{
 			shoot();
 		}
@@ -96,12 +96,25 @@
 		ship.xvel*=0.9;
 		ship.yvel*=0.9;
 	}
+	function getTerminal(username){
+		for(var p = 0; p<ship.crew.length;p++){
+				entity = ship.crew[p];
+				if(entity.username == username){
+					let floorlist = ship.terminals;
+					if (checkCollision(entity.x + entity.xvel, entity.y + entity.yvel, entity.width, entity.height, floorlist)) {
+						return whatCollided(entity.x + entity.xvel, entity.y + entity.yvel, entity.width, entity.height, floorlist).name;
+					}
+			}
+		}
+		return "";
+	}
 	function use(){
 		if(view == "exterior"){
 			view = "interior";
 			job = "";
 		}else{
-
+			var terminal = getTerminal("prime");
+			console.log(terminal);
 		}
 	}
 	function move(xv,yv){
@@ -110,11 +123,14 @@
 		if(Math.abs(yv)>0)
 		player.yvel = yv*20;
 	}
-	function keycheck(){
-
-		if(keylist.includes(69)){//E
+	function releaseKey(keycode){
+		if(keycode == 69){//E
 			use();
 		}
+	}
+	function keycheck(){
+
+		
 		if(keylist.includes(87)){//W
 			if(job == "pilot"){
 				thrust();
