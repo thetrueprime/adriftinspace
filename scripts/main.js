@@ -120,17 +120,24 @@
 			screenpy = HEIGHT/2;
 		}
 
+		function sendInfo(){
+
+		}
+
+		function receiveInfo(){
+			
+		}
 
 		function update() {
 		    //input
 		    keycheck();
 		    recalculateMouse();
 			playeractual();
-			//
+			//multiplayer
 			
 		
 
-
+			//
 			test.position.x = mousex-5;
 			test.position.y = mousey-5;
 			test.width = 10;
